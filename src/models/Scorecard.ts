@@ -1,5 +1,6 @@
 import { TAll } from 'jet-validator';
 import { ITeam } from './Team';
+import { ICriterion } from './Criterion';
 
 // **** Types **** //
 
@@ -7,6 +8,7 @@ export interface IScorecard {
   id: number;
   name: string;
   team: ITeam;
+  criteria: ICriterion[];
 }
 
 // **** Functions **** //
@@ -14,12 +16,19 @@ export interface IScorecard {
 /**
  * Get a new User object.
  */
-function new_(name: string, team: ITeam): IScorecard {
+function new_(name: string, team: ITeam, criteria?: ICriterion[]): IScorecard {
   return {
     id: -1,
     name,
     team,
+    criteria: criteria || [],
   };
+}
+function assignCriteria(
+  scorecard: IScorecard,
+  criterion: ICriterion,
+): IScorecard {
+  return { ...scorecard, criteria: [...scorecard.criteria, criterion] };
 }
 
 /**
@@ -33,6 +42,7 @@ function duplicateScorecard(
     id: -1,
     name: `${scorecard.name} copy`,
     team: assignTeam,
+    criteria: scorecard.criteria,
   };
 }
 
@@ -47,6 +57,7 @@ function instanceOf(arg: TAll): boolean {
 
 export default {
   new: new_,
+  assignCriteria,
   duplicateScorecard,
   instanceOf,
 } as const;

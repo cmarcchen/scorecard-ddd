@@ -24,11 +24,11 @@ describe('Scorecard Test', () => {
     const teamB = Team.new('dotCom');
     const scorecardToDuplicate: IScorecard = Scorecard.new(
       'scorecardTeamA',
-      teamA
+      teamA,
     );
     const duplicatedScorecard: IScorecard = Scorecard.duplicateScorecard(
       scorecardToDuplicate,
-      teamB
+      teamB,
     );
     expect(duplicatedScorecard.team).toEqual(teamB);
   });

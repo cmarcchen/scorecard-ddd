@@ -1,12 +1,12 @@
 import { TAll } from 'jet-validator';
 
-enum CalculationRuleType {
+export enum CalculationRuleType {
   DIRECT,
   THRESHOLD,
   NONE,
 }
 
-interface CalculationRule {
+export interface CalculationRule {
   type: CalculationRuleType;
   ruleSet?: any;
 }
@@ -54,21 +54,32 @@ function new_(
     calculationRule,
   };
 }
+function updateWeightOfCriteria(
+  criterion: ICriterion,
+  weight: number,
+): ICriterion {
+  return { ...criterion, weight };
+}
 
 /**
  * See if an object is an instance of User.
  */
 function instanceOf(arg: TAll): boolean {
-  return !!arg && typeof arg === 'object' && 'id' in arg && 'name' in arg;
+  return (
+    !!arg &&
+    typeof arg === 'object' &&
+    'id' in arg &&
+    'name' &&
+    'weight' &&
+    'description' &&
+    'calculationRule' in arg
+  );
 }
 
 // **** Export default **** //
 
 export default {
   new: new_,
+  updateWeightOfCriteria,
   instanceOf,
 } as const;
-
-new_('my scorecard', 0.2, 'my description', {
-  type: CalculationRuleType.NONE,
-});
