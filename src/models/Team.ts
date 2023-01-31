@@ -3,7 +3,7 @@ import { TAll } from 'jet-validator';
 
 // **** Types **** //
 
-export interface IScorecard {
+export interface ITeam {
   id: number;
   name: string;
 }
@@ -15,22 +15,13 @@ export interface IScorecard {
  */
 function new_(
   name: string,
-): IScorecard {
+): ITeam {
   return {
     id: -1,
     name,
   };
 }
 
-/**
- * Copy a user object.
- */
-function duplicateScorecard(scorecard: IScorecard): IScorecard {
-  return {
-    id: -1,
-    name: scorecard.name,
-  };
-}
 
 /**
  * See if an object is an instance of User.
@@ -49,6 +40,5 @@ function instanceOf(arg: TAll): boolean {
 
 export default {
   new: new_,
-  duplicateScorecard,
   instanceOf,
 } as const;
