@@ -6,23 +6,23 @@ enum CalculationRuleType {
   NONE,
 }
 
-type CalculationRule = 
-| ThresholdCalculationRule 
-| DirectCalculationRule 
-| NoneCalculationRule
+interface CalculationRule {
+  type: CalculationRuleType;
+  ruleSet?: any;
+}
 
-export interface ThresholdCalculationRule  {
+export interface ThresholdCalculationRule extends CalculationRule {
   type: CalculationRuleType.THRESHOLD;
   ruleSet: Array<{ thresholdPoint: number; score: number }>;
 }
 
-export interface DirectCalculationRule {
-  type: CalculationRuleType.DIRECT
-  ruleSet: Record<string, number | undefined>
+export interface DirectCalculationRule extends CalculationRule {
+  type: CalculationRuleType.DIRECT;
+  ruleSet: Record<string, number | undefined>;
 }
 
-export interface NoneCalculationRule {
-  type: CalculationRuleType.NONE
+export interface NoneCalculationRule extends CalculationRule {
+  type: CalculationRuleType.NONE;
 }
 
 // **** Types **** //
@@ -68,3 +68,7 @@ export default {
   new: new_,
   instanceOf,
 } as const;
+
+new_('my scorecard', 0.2, 'my description', {
+  type: CalculationRuleType.NONE,
+});
