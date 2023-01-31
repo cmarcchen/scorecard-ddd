@@ -12,7 +12,7 @@ import ScorecardRoutes from './ScorecardRoutes';
 // **** Variables **** //
 
 const apiRouter = Router(),
-	validate = jetValidator();
+  validate = jetValidator();
 
 // **** Setup **** //
 
@@ -20,9 +20,9 @@ const authRouter = Router();
 
 // Login user
 authRouter.post(
-	Paths.Auth.Login,
-	validate('email', 'password'),
-	AuthRoutes.login
+  Paths.Auth.Login,
+  validate('email', 'password'),
+  AuthRoutes.login,
 );
 
 // Logout user
@@ -40,23 +40,23 @@ userRouter.get(Paths.Users.Get, UserRoutes.getAll);
 
 // Add one user
 userRouter.post(
-	Paths.Users.Add,
-	validate(['user', User.instanceOf]),
-	UserRoutes.add
+  Paths.Users.Add,
+  validate(['user', User.instanceOf]),
+  UserRoutes.add,
 );
 
 // Update one user
 userRouter.put(
-	Paths.Users.Update,
-	validate(['user', User.instanceOf]),
-	UserRoutes.update
+  Paths.Users.Update,
+  validate(['user', User.instanceOf]),
+  UserRoutes.update,
 );
 
 // Delete one user
 userRouter.delete(
-	Paths.Users.Delete,
-	validate(['id', 'number', 'params']),
-	UserRoutes.delete
+  Paths.Users.Delete,
+  validate(['id', 'number', 'params']),
+  UserRoutes.delete,
 );
 
 // Add UserRouter
