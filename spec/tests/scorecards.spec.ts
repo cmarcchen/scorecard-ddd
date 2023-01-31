@@ -9,7 +9,6 @@ import FullPaths from '@src/routes/constants/FullPaths';
 
 import login from '../support/login';
 import { TReqBody } from 'spec/support/types';
-import Team, { ITeam } from '@src/models/Team';
 
 // **** Variables **** //
 
@@ -20,7 +19,6 @@ const { Get, Post } = FullPaths.Scorecards;
 const { OK, CREATED } = HttpStatusCodes;
 
 // Dummy scorecards for GET req
-const team: ITeam = Team.new('MMM');
 const DummyGetAllScorecards = [
   Scorecard.new('peopleHub'),
   Scorecard.new('scorecardPod'),

@@ -1,12 +1,17 @@
 import { TAll } from 'jet-validator';
 import { ICriterion } from './Criterion';
+import { addOneMonth } from '@src/util/misc';
 
 // **** Types **** //
-
+export interface IMonthMetrics {
+  month: string;
+  metrics: (string | number)[];
+}
 export interface IScorecard {
   id: number;
   name: string;
   criteria: ICriterion[];
+  monthMetrics: IMonthMetrics[];
 }
 
 // **** Functions **** //
@@ -14,11 +19,16 @@ export interface IScorecard {
 /**
  * Get a new User object.
  */
-function new_(name: string, criteria?: ICriterion[]): IScorecard {
+function new_(
+  name: string,
+  criteria?: ICriterion[],
+  monthMetrics?: IMonthMetrics[],
+): IScorecard {
   return {
     id: -1,
     name,
     criteria: criteria || [],
+    monthMetrics: monthMetrics || [],
   };
 }
 function assignCriteria(
@@ -28,14 +38,27 @@ function assignCriteria(
   return { ...scorecard, criteria: [...scorecard.criteria, criterion] };
 }
 
+function incrementByOneMonth(scorecard: IScorecard): IScorecard {
+  return {
+    ...scorecard,
+    monthMetrics: [
+      ...scorecard.monthMetrics,
+      {
+        month: addOneMonth(scorecard.monthMetrics[-1].month),
+        metrics: scorecard.monthMetrics[-1].metrics,
+      },
+    ],
+  };
+}
+
 /**
  * Copy a user object.
  */
 function duplicateScorecard(scorecard: IScorecard): IScorecard {
   return {
+    ...scorecard,
     id: -1,
     name: `${scorecard.name} copy`,
-    criteria: scorecard.criteria,
   };
 }
 
