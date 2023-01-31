@@ -44,8 +44,8 @@ function incrementByOneMonth(scorecard: IScorecard): IScorecard {
     monthMetrics: [
       ...scorecard.monthMetrics,
       {
-        month: addOneMonth(scorecard.monthMetrics[-1].month),
-        metrics: scorecard.monthMetrics[-1].metrics,
+        month: addOneMonth(scorecard.monthMetrics.slice(-1)[0].month),
+        metrics: scorecard.monthMetrics.slice(-1)[0].metrics,
       },
     ],
   };
@@ -75,5 +75,6 @@ export default {
   new: new_,
   assignCriteria,
   duplicateScorecard,
+  incrementByOneMonth,
   instanceOf,
 } as const;

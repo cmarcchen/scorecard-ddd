@@ -1,4 +1,4 @@
-import Scorecard, { IScorecard } from '@src/models/Scorecard';
+import Scorecard, { IMonthMetrics, IScorecard } from '@src/models/Scorecard';
 import Team from '@src/models/Team';
 
 const { instanceOf, duplicateScorecard } = Scorecard;
@@ -38,5 +38,15 @@ describe('Scorecard Test', () => {
     expect(teamBWithDuplicatedScorecard.scorecards[0].name).toEqual(
       `${teamAWithScorecard.scorecards[0].name} copy`,
     );
+  });
+  it('should add one MonthMetric', () => {
+    const metrics: IMonthMetrics[] = [
+      { month: '2022-02', metrics: ['poulet', 1] },
+    ];
+    const scorecard = Scorecard.new('PodScorecard', [], metrics);
+    const newScorecard = Scorecard.incrementByOneMonth(scorecard);
+    expect(scorecard.monthMetrics[0].month).toEqual('2022-02');
+    expect(newScorecard.monthMetrics[0].month).toEqual('2022-02');
+    expect(newScorecard.monthMetrics[1].month).toEqual('2022-03');
   });
 });
