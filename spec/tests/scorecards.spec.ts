@@ -22,14 +22,14 @@ const { OK, CREATED } = HttpStatusCodes;
 // Dummy scorecards for GET req
 const team: ITeam = Team.new('MMM');
 const DummyGetAllScorecards = [
-  Scorecard.new('peopleHub', team),
-  Scorecard.new('scorecardPod', team),
-  Scorecard.new('dotCom', team),
+  Scorecard.new('peopleHub'),
+  Scorecard.new('scorecardPod'),
+  Scorecard.new('dotCom'),
 ] as const;
 
 // Dummy update scorecard
 const DummyScorecardData = {
-  scorecard: Scorecard.new('MMM', team),
+  scorecard: Scorecard.new('MMM'),
 } as const;
 
 // **** Tests **** //
@@ -67,7 +67,7 @@ describe('ScorecardRouter', () => {
           }
           done();
         });
-      }
+      },
     );
   });
 
@@ -90,7 +90,7 @@ describe('ScorecardRouter', () => {
           expect(res.body.message).toBe('Scorecard created');
           done();
         });
-      }
+      },
     );
 
     // // Missing param
