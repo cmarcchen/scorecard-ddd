@@ -27,7 +27,7 @@ function new_(name: string, team: ITeam): IScorecard {
  */
 function duplicateScorecard(
   scorecard: IScorecard,
-  assignTeam: ITeam
+  assignTeam: ITeam,
 ): IScorecard {
   return {
     id: -1,
